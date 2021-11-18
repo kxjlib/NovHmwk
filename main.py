@@ -1,4 +1,7 @@
+from school.school import School
 from people.student import Student
-from people.genderEnum import Gender
+from people.enums.genderEnum import Gender
+from people.sixth_form_student import SixthFormStudent
+from people.person import Person
 
-Student("Jiminy Cricket", 10, Gender.MALE)
+the_west_bridgford_school = School()
