@@ -1,8 +1,9 @@
+from people.sixth_form_student import SixthFormStudent
 from people.student import Student
 from people.teacher import Teacher
 from people.enums.genderEnum import Gender
 
-from typing import Union
+from typing import Union, Tuple
 
 """
 School Class
@@ -53,4 +54,9 @@ class School():
     """
     
     def get_sixth_form_students(self) -> list:
-        sixth_form_students = []
+        return [_ for _ in self.students if isinstance(_, SixthFormStudent)]
+    
+    def get_all_subject_learners(self, subject_name: str) -> Tuple[Teacher, SixthFormStudent]:
+        return ([_ for _ in self.teachers if subject_name in _.subjects_taught],
+                [_ for _ in self.get_sixth_form_students() if subject_name in _.subjects])
+
