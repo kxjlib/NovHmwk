@@ -12,10 +12,9 @@ Holds information about the school, and the people within.
 
 
 class School():
-    def __init__(self, teachers: list = [], students: list = [], lesssons_taught: list = []):
+    def __init__(self, teachers: list = [], students: list = []):
         self.teachers = teachers
         self.students = students
-        self.lesssons_taught = lesssons_taught
 
     """
     Add Teacher Method
@@ -36,7 +35,7 @@ class School():
     """
 
     def add_student(self, student: Union[list, Student]):
-        
+
         # This code will test what type the student property is
         # , and will either append just one student or all of them
         # We use isinstance because it will return true for
@@ -52,11 +51,16 @@ class School():
     Get Sixth Form Students Method
     From the self.students list, return all students that are 6th form students
     """
-    
+
     def get_sixth_form_students(self) -> list:
         return [_ for _ in self.students if isinstance(_, SixthFormStudent)]
-    
+
+    """
+    Get All Subject Learners
+    Returns a tuple of all Teachers & Sixth Form Students that take a certain subject
+    """
+
     def get_all_subject_learners(self, subject_name: str) -> Tuple[Teacher, SixthFormStudent]:
+        # We use a list comprehension to return a subsection of the list in one line
         return ([_ for _ in self.teachers if subject_name in _.subjects_taught],
                 [_ for _ in self.get_sixth_form_students() if subject_name in _.subjects])
-
