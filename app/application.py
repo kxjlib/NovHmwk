@@ -96,7 +96,16 @@ class Application:
 
         with open(filename, 'rb') as file:
             self.school = pickle.load(file)
+    
+        self.init_listbox()
 
     # New School File Function
     def file_new_school(self, _=None):
         self.school = School()
+        self.init_listbox()
+
+    # Init listbox - Load all students and teachers into the listbox
+    def init_listbox(self):
+        self.people_listbox.delete(0, tk.END)
+        for student in self.school.students:
+            self.people_listbox.insert(tk.END, student.name)
