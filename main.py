@@ -5,9 +5,9 @@ Python OOP Assessed Exercise
 """
 
 from os import path
-import tkinter as tk
-from tkinter import filedialog
-from tkinter.filedialog import askopenfilename
+
+from app.application import Application
+
 
 from school.school import School
 from people.teacher import Teacher
