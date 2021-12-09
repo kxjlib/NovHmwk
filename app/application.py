@@ -1,5 +1,12 @@
 import tkinter as tk
+import tkcalendar
+from tkinter.font import nametofont
 from tkinter.filedialog import askopenfilename
+from types import new_class
+
+from people.sixth_form_student import SixthFormStudent
+from people.student import Student
+from people.teacher import Teacher
 
 from school.school import School
 
@@ -19,8 +26,12 @@ class Application:
         self.root.resizable(False, False)
         self.root.title("School Management System")
         self.root.iconbitmap("assets/window_icon.ico")
+        # Set Default Font
+        default_font = nametofont("TkDefaultFont")
+        default_font.configure(size=9)
+        self.root.option_add("*Font", default_font)
 
-        self.school = None
+        self.school = School()
 
         self.create_menubar()
         self.pack_ui()
@@ -59,10 +70,21 @@ class Application:
         for binding, command in file_menu_shortcuts.items():
             file_menu.bind_all(binding, command)
 
+    # Creates the UI as a whole
     def pack_ui(self):
+        self.create_listbox_ui()
+        self.create_person_ui()
+
+    # This method creates the UI that appears on the left.
+    def create_listbox_ui(self):
+        # Here we are creating a frame which is being used to draw to.
+        # A "canvas" which we draw to
         self.ui_frame = tk.Frame(self.root)
-        self.listbox_scrollbar = tk.Scrollbar(self.ui_frame, orient=tk.VERTICAL)
-        self.people_listbox = tk.Listbox(self.ui_frame, width=50, height=30, yscrollcommand=self.listbox_scrollbar.set)
+        self.listbox_scrollbar = tk.Scrollbar(
+            self.ui_frame, orient=tk.VERTICAL)
+        # This listbox holds all people of the school in
+        self.people_listbox = tk.Listbox(
+            self.ui_frame, width=50, height=30, yscrollcommand=self.listbox_scrollbar.set)
 
         # Configure Scrollbar
         self.listbox_scrollbar.config(command=self.people_listbox.yview)
@@ -70,8 +92,34 @@ class Application:
         self.listbox_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.people_listbox.pack(pady=15)
 
-        self.ui_frame.pack(anchor='nw')
+        # Create the New Person Button
+        self.new_person_button = tk.Button(self.ui_frame, text="Append Person", command=self.new_person)
+        self.new_person_button.pack(side=tk.RIGHT,padx=40)
 
+
+        # Remove Person Button
+        self.new_person_button = tk.Button(self.ui_frame, text="Remove Person", command=self.remove_person)
+        self.new_person_button.pack(side=tk.RIGHT)
+
+        # Packs the "Canvas"
+        self.ui_frame.pack(side=tk.LEFT)
+    
+    # This UI will be able to modify each individual person.
+    def create_person_ui(self):
+        # Create the frame that this UI will be rendered in
+        self.person_frame = tk.Frame(self.root)
+
+        # Name Entry
+        self.name_entry = tk.Entry(self.person_frame,font=("TkDefaultFont 16"), justify='center')
+        self.name_entry.insert(tk.END, "Full Name")
+        self.name_entry.pack(pady=30)
+
+        # Pack the UI
+        self.person_frame.pack_propagate(0)
+        self.person_frame.config(width=500)
+
+        self.person_frame.pack(side=tk.RIGHT,fill=tk.BOTH)
+        
 
     # Run function:
     # Runs the application by opening the window
@@ -96,7 +144,7 @@ class Application:
 
         with open(filename, 'rb') as file:
             self.school = pickle.load(file)
-    
+
         self.init_listbox()
 
     # New School File Function
@@ -106,6 +154,19 @@ class Application:
 
     # Init listbox - Load all students and teachers into the listbox
     def init_listbox(self):
+        type_prefix = {
+            SixthFormStudent: '[SF] ',
+            Student: '[LS] ',
+            Teacher: '[TE] ',
+        }
         self.people_listbox.delete(0, tk.END)
         for student in self.school.students:
-            self.people_listbox.insert(tk.END, student.name)
+            self.people_listbox.insert(tk.END, type_prefix[type(student)] + student.name)
+    
+    # New Person method.
+    def new_person(self):
+        pass
+
+    # Remove Person method.
+    def remove_person(self):
+        pass

@@ -4,6 +4,10 @@ Python OOP Assessed Exercise
 6.12.21
 """
 
+# IMPORTANT NOTE
+# THIS PROGRAM NON-STANDARD MODULES
+# FIND THEM IN requirements.txt
+
 from os import path
 
 from app.application import Application
