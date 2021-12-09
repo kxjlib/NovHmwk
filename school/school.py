@@ -12,9 +12,13 @@ Holds information about the school, and the people within.
 
 
 class School():
+    school_ids_used = []
+
     def __init__(self, teachers: list = [], students: list = []):
         self.teachers = teachers
         self.students = students
+        self.school_id = len(School.school_ids_used + 1)
+        School.school_ids_used.append(self.school_id)
 
     """
     Add Teacher Method

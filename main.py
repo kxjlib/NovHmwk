@@ -8,17 +8,8 @@ Python OOP Assessed Exercise
 # THIS PROGRAM NON-STANDARD MODULES
 # FIND THEM IN requirements.txt
 
-from os import path
-
 from app.application import Application
 
-
-from school.school import School
-from people.teacher import Teacher
-from people.student import Student
-from people.enums.genderEnum import Gender
-from people.sixth_form_student import SixthFormStudent
-from people.person import Person
 
 def main():
     app = Application()

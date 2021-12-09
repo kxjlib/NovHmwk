@@ -114,6 +114,14 @@ class Application:
         self.name_entry.insert(tk.END, "Full Name")
         self.name_entry.pack(pady=30)
 
+        # DOB entry Label
+        self.dob_label = tk.Label(self.person_frame, text="DOB",font=("TkDefaultFont 12 bold"))
+        self.dob_label.pack(anchor='nw',padx=100,pady=10)
+        
+        # DOB DatePicker
+        self.dob_calendar = tkcalendar.DateEntry(self.person_frame, width=12)
+        self.dob_calendar.pack(anchor='nw',padx=78)
+
         # Pack the UI
         self.person_frame.pack_propagate(0)
         self.person_frame.config(width=500)
