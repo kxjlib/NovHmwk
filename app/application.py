@@ -262,8 +262,16 @@ class Application:
         if p_type == "Student":
             p_behaviour = self.behaviour_var.get()
             p_yeargroup = self.yeargroup_year_var.get() + self.yeargroup_form_var.get()
-            Student(p_name, p_dob, p_gender, self.school.school_id, p_yeargroup, p_behaviour)
-
+            p_student = Student(p_name, p_dob, p_gender, self.school.school_id, p_yeargroup, p_behaviour)
+            self.school.add_student(p_student)
+            self.init_listbox()
+        
+        if p_type == "Teacher":
+            p_salary = int(self.teacher_salary_entry.get())
+            p_subjects = self.subjects_taught_listbox.get(0)
+            print(p_subjects)
+            
+            
     # Remove Person method.
     def remove_person(self):
         pass
@@ -329,12 +337,6 @@ class Application:
         # action=1 -> insert
         if(action == '1'):
             if text in '0123456789':
-                try:
-                    float(value_if_allowed)
-                    return True
-                except ValueError:
-                    return False
-            else:
-                return False
-        else:
-            return True
+                return True
+            return False
+        return True
