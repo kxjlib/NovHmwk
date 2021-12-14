@@ -1,7 +1,6 @@
 from people.sixth_form_student import SixthFormStudent
 from people.student import Student
 from people.teacher import Teacher
-from people.enums.genderEnum import Gender
 
 from typing import Union, Tuple
 
@@ -12,13 +11,13 @@ Holds information about the school, and the people within.
 
 
 class School():
-    school_ids_used = []
+    _school_ids_used = []
 
     def __init__(self, teachers: list = [], students: list = []):
         self.teachers = teachers
         self.students = students
-        self.school_id = len(School.school_ids_used + 1)
-        School.school_ids_used.append(self.school_id)
+        self.school_id = len(School._school_ids_used) +1
+        School._school_ids_used.append(self.school_id)
 
     """
     Add Teacher Method

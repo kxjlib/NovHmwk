@@ -8,6 +8,6 @@ Holds a subject list
 
 
 class SixthFormStudent(Student):
-    def __init__(self, name: str, age: int, gender: Gender, school_identifier: int, subjects: list):
-        super().__init__(name, age, gender, school_identifier)
+    def __init__(self, name: str, age: int, gender: Gender, school_identifier: int,  yeargroup:str, behaviour:str, subjects: list):
+        super().__init__(name, age, gender, school_identifier, yeargroup)
         self.subjects = subjects
