@@ -1,7 +1,7 @@
 """
 William Davies
 Python OOP Assessed Exercise
-6.12.21
+16.12.21
 """
 from app.application import Application
 
@@ -12,4 +12,5 @@ def main():
 
 
 if __name__ == "__main__":
+    print(__doc__)
     main()
